@@ -1,5 +1,5 @@
 // Projet Fin SAS 1 Youcode: Gestion d’un train en console “Railway Manager
-const prompt = require('prompt-sync')();
+const prompte = require('prompt-sync')();
 
 const trips = [
     {
@@ -186,22 +186,63 @@ const trips = [
 
 const tickets = [];
 
-// afficher all traject 
-function afficherlestrajects() {
-    for (let element in trips) {
-        let traject =  trips[element].id + " " +  
-        trips[element].departure + " --->  " +
-        trips[element].destination +
-        '\n' +" Départ : " + trips[element].departureTime +
-        '\n' + " Arrivée : " + trips[element].arrivalTime +
-        '\n' + " Prix : " + trips[element].price + "DH" + 
-        '\n' + " Places disponibles : " + trips[element].availableSeats
-        console.log(traject)
-        console.log("_____________________________________________")
-    };
+function getUserinput(question) {
+    let input = prompte(question);
+    return input
+}
 
-};
-afficherlestrajects();
+// afficher all traject 
+// function afficherlestrajects() {
+//     for (let element in trips) {
+//         let traject =  trips[element].id + " " +  
+//         trips[element].departure + " --->  " +
+//         trips[element].destination +
+//         '\n' +" Départ : " + trips[element].departureTime +
+//         '\n' + " Arrivée : " + trips[element].arrivalTime +
+//         '\n' + " Prix : " + trips[element].price + "DH" + 
+//         '\n' + " Places disponibles : " + trips[element].availableSeats
+//         console.log(traject)
+//         console.log("_____________________________________________")
+//     };
+
+// };
+
+// afficherlestrajects();
+
+
 
 // Acheter un ticket
+// resarch 3la ticket 
 
+
+//nom = getUserinput("entrer your nome")
+let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
+let check;
+function rechercheletraject(trips, Iddetrajet) {
+    for (let element in trips) {
+        if (trips[element].id == Iddetrajet) {
+            if (trips[element].availableSeats > 0)
+                return check = trips[element]
+            else {
+                console.log(" train complet ")
+            }
+        }
+    };
+    console.log("Trajet introuvable.");
+};
+triptraject = rechercheletraject(trips, Iddetrajet)
+console.log(triptraject)
+
+
+
+
+
+
+
+// let ticket = trips[element].id + " " +
+//     trips[element].departure + " --->  " +
+//     trips[element].destination +
+//     '\n' + " Départ : " + trips[element].departureTime +
+//     '\n' + " Arrivée : " + trips[element].arrivalTime +
+//     '\n' + " Prix : " + trips[element].price + "DH" +
+//     '\n' + " Places disponibles : " + trips[element].availableSeats
