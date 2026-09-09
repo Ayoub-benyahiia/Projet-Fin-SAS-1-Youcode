@@ -191,28 +191,31 @@ function getUserinput(question) {
     return input
 }
 
-// afficher all traject 
-function afficherlestrajects() {
-    for (let element in trips) {
-        let traject =  trips[element].id + " " +  
-        trips[element].departure + " --->  " +
-        trips[element].destination +
-        '\n' +" Départ : " + trips[element].departureTime +
-        '\n' + " Arrivée : " + trips[element].arrivalTime +
-        '\n' + " Prix : " + trips[element].price + "DH" + 
-        '\n' + " Places disponibles : " + trips[element].availableSeats
-        console.log(traject)
-        console.log("_____________________________________________")
-    };
-
-};
-
-afficherlestrajects();
-
-
-
 // Acheter un ticket
-// check trajet
+// resarch of ticket 
+
+
+// //nom = getUserinput("entrer your nome")
+// let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
+// let check;
+// function rechercheletraject(trips, Iddetrajet) {
+//     for (let element in trips) {
+//         if (trips[element].id == Iddetrajet) {
+//             if (trips[element].availableSeats > 0)
+//                 return check = trips[element]
+//         } 
+//         console.log(" train complet ")
+
+//         }
+//     };
+//     console.log("Trajet introuvable.");
+// };
+// triptraject = rechercheletraject(trips, Iddetrajet)
+// console.log(triptraject)
+
+
+// 
+//let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
 function checktrajet(trips, Iddetrajet) {
     let check;
     let trajet;
@@ -233,3 +236,4 @@ function checktrajet(trips, Iddetrajet) {
 
 let output = checktrajet(trips, 90)
 console.log(output)
+
