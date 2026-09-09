@@ -186,6 +186,7 @@ const trips = [
 
 const tickets = [];
 
+// fonction dynamic for input
 function getUserinput(question) {
     let input = prompte(question);
     return input
@@ -213,6 +214,8 @@ afficherlestrajects();
 
 // Acheter un ticket
 // check trajet
+let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
+
 function checktrajet(trips, Iddetrajet) {
     let check;
     let trajet;
@@ -231,5 +234,23 @@ function checktrajet(trips, Iddetrajet) {
     };
 };
 
-let output = checktrajet(trips, 90)
+let output = checktrajet(trips, Iddetrajet)
 console.log(output)
+
+/// // vérifier qu'il reste au moins une place disponible ;
+
+let trip = checktrajet(trips, Iddetrajet)
+
+function checkforavailaiblePlaces(trip) {
+    if (trip.availableSeats > 0) {
+        return " seats available ";
+    }
+    else {
+        return " train is full ";
+    }
+};
+
+placedispo = checkforavailaiblePlaces(trip)
+console.log(placedispo);
+
+

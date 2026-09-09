@@ -186,54 +186,47 @@ const trips = [
 
 const tickets = [];
 
-function getUserinput(question) {
-    let input = prompte(question);
-    return input
-}
+// function getUserinput(question) {
+//     let input = prompte(question);
+//     return input
+// }
 
-// Acheter un ticket
-// resarch of ticket 
-
-
-// //nom = getUserinput("entrer your nome")
+// // Acheter un ticket
+// // resarch of ticket 
+// // 
 // let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
-// let check;
-// function rechercheletraject(trips, Iddetrajet) {
-//     for (let element in trips) {
-//         if (trips[element].id == Iddetrajet) {
-//             if (trips[element].availableSeats > 0)
-//                 return check = trips[element]
-//         } 
-//         console.log(" train complet ")
-
+// function checktrajet(trips, Iddetrajet) {
+//     let check;
+//     let trajet;
+//     for (let i in trips) {
+//         if (trips[i].id == Iddetrajet ) {
+//             check = true
+//             trajet = trips[i]
 //         }
 //     };
-//     console.log("Trajet introuvable.");
+//     if (check) {
+//         console.log(" trajet existe")
+//         return trajet
+//     }
+//     else {
+//         return " trajet not existe "
+//     };
 // };
-// triptraject = rechercheletraject(trips, Iddetrajet)
-// console.log(triptraject)
 
+// let trip = checktrajet(trips, Iddetrajet)
 
-// 
-//let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
-function checktrajet(trips, Iddetrajet) {
-    let check;
-    let trajet;
-    for (let i in trips) {
-        if (trips[i].id == Iddetrajet) {
-            check = true
-            trajet = trips[i]
-        }
-    };
-    if (check) {
-        console.log(" trajet existe")
-        return trajet
-    }
-    else {
-        return " trajet not existe "
-    };
-};
+// // vérifier qu'il reste au moins une place disponible ;
+// function verifierPlaces(trip) {
+//     //console.log(trip)
+//     // let places;
+//     if (trip.availableSeats > 0) {
+//         return " seats available ";
+//     }
+//     else {
+//         return " train is full ";
+//     }
+// };
 
-let output = checktrajet(trips, 90)
-console.log(output)
+// placedispo = verifierPlaces(trip)
+// console.log(placedispo);
 
