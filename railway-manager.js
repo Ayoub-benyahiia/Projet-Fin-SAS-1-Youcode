@@ -211,9 +211,8 @@ function afficherlestrajects() {
 afficherlestrajects();
 
 
+// 4. Acheter un ticket
 
-// Acheter un ticket
-// check trajet
 let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
 
 function checktrajet(trips, Iddetrajet) {
@@ -254,3 +253,23 @@ placedispo = checkforavailaiblePlaces(trip)
 console.log(placedispo);
 
 
+// créer une fonction to generate ticket ;
+let username = getUserinput(" entrer your name : ")
+function ticketgenerate(username, trip) {
+    let ticket = {
+        idTicket: tickets.length + 1,
+        userName: username,
+        tripId: trip.id,
+        seatNumber: 50 - trip.availableSeats + 1,
+        price: trip.price
+    };
+    tickets.push(ticket);
+    trip.availableSeats = trip.availableSeats - 1;
+    console.log(tickets)
+    console.log(' Ticket acheté avec succès !')
+};
+let ticketsout = ticketgenerate(username, trip);
+console.log(ticketsout)
+
+
+// 5. Afficher les tickets

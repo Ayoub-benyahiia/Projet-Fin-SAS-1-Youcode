@@ -230,3 +230,4 @@ const tickets = [];
 // placedispo = verifierPlaces(trip)
 // console.log(placedispo);
 
+
