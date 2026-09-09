@@ -195,13 +195,13 @@ function getUserinput(question) {
 // afficher all traject 
 function afficherlestrajects() {
     for (let element in trips) {
-        let traject =  trips[element].id + " " +  
-        trips[element].departure + " --->  " +
-        trips[element].destination +
-        '\n' +" Départ : " + trips[element].departureTime +
-        '\n' + " Arrivée : " + trips[element].arrivalTime +
-        '\n' + " Prix : " + trips[element].price + "DH" + 
-        '\n' + " Places disponibles : " + trips[element].availableSeats
+        let traject = trips[element].id + " " +
+            trips[element].departure + " --->  " +
+            trips[element].destination +
+            '\n' + " Départ : " + trips[element].departureTime +
+            '\n' + " Arrivée : " + trips[element].arrivalTime +
+            '\n' + " Prix : " + trips[element].price + "DH" +
+            '\n' + " Places disponibles : " + trips[element].availableSeats
         console.log(traject)
         console.log("_____________________________________________")
     };
@@ -259,6 +259,8 @@ function ticketgenerate(username, trip) {
     let ticket = {
         idTicket: tickets.length + 1,
         userName: username,
+        depart: trip.departure,
+        arrivée: trip.destination,
         tripId: trip.id,
         seatNumber: 50 - trip.availableSeats + 1,
         price: trip.price
@@ -272,4 +274,22 @@ let ticketsout = ticketgenerate(username, trip);
 console.log(ticketsout)
 
 
-// 5. Afficher les tickets
+// // 5. Afficher les tickets
+function afficherlestickets(tickets) {
+    for (let ticket in tickets) {
+        if (ticket in tickets) {
+            console.log(
+                'Ticket : ', tickets[ticket].idTicket,
+                'Passager :', tickets[ticket].userName,
+                'Trajet : ', tickets[ticket].depart, "--->", tickets[ticket].arrivée,
+                'Place : ', tickets[ticket].seatNumber,
+                'Prix : ', tickets[ticket].price, " DH"
+            )
+        }
+        else {
+            console.log(" Aucun ticket enregistré ")
+        }
+    };
+};
+let ticketEnregistree = afficherlestickets(tickets);
+console.log(ticketEnregistree)
