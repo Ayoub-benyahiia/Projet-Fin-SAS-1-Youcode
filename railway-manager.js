@@ -346,3 +346,23 @@ function afficherbyname(tickets, prenom) {
 let outputbyname = afficherbyname(tickets, prenom)
 console.log(outputbyname)
 
+// 8. Filtrer les trajets
+
+let departville = getUserinput(" entre your ville de depart ")
+function filtrertraject(trips, departville) {
+    let foundville = [];
+    for (let element in trips) {
+        if (trips[element].departure === departville) {
+            foundville.push(trips[element]);
+        };
+    };
+    for (let i in foundville) {
+        console.log(
+            '\n', " Ville de départ  " + departville,
+            '\n' + " depart : ", foundville[i].departure, "---->", foundville[i].destination, ":", foundville[i].price
+        )
+    };
+    return foundville;
+};
+
+filtrertraject(trips, departville);
