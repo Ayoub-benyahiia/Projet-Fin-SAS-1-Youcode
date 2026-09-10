@@ -316,3 +316,33 @@ function Removeticket(tickets, ticketID) {
 let removedticket = Removeticket(tickets, ticketID)
 console.log(removedticket)
 
+// 7. Rechercher un ticket
+
+let prenom = getUserinput(" entrer your name : ")
+function afficherbyname(tickets, prenom) {
+    let check;
+    let foundticket;
+    for (let ticket in tickets) {
+        if (tickets[ticket].userName == prenom)
+            check = true
+        foundticket = tickets[ticket]
+
+    };
+    if (check) {
+        console.log(" Ticket : ")
+        console.log(
+            'Ticket : ', foundticket.idTicket,
+            'Passager :', foundticket.userName,
+            'Trajet : ', foundticket.depart, "--->", foundticket.arrivée,
+            'Place : ', foundticket.seatNumber,
+            'Prix : ', foundticket.price, " DH"
+        )
+    }
+    else {
+        return " ticket not found !"
+    };
+};
+
+let outputbyname = afficherbyname(tickets, prenom)
+console.log(outputbyname)
+
