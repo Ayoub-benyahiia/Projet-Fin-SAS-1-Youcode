@@ -293,3 +293,26 @@ function afficherlestickets(tickets) {
 };
 let ticketEnregistree = afficherlestickets(tickets);
 console.log(ticketEnregistree)
+
+// 6. Annuler un ticket
+
+let ticketID = getUserinput(" entrer your Identifiant du ticket : ")
+function Removeticket(tickets, ticketID) {
+    let check;
+    for (let i in tickets) {
+        if (tickets[i].idTicket == ticketID)
+            check = true
+    };
+    if (check) {
+        tickets.splice(ticketID, 1);
+        console.log(" Ticket annulé avec succès.");
+        return tickets;
+    }
+    else {
+        return " Ticket introuvable. "
+    };
+};
+
+let removedticket = Removeticket(tickets, ticketID)
+console.log(removedticket)
+
