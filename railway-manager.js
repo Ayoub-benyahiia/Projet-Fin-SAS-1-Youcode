@@ -208,7 +208,7 @@ function afficherlestrajects() {
 
 };
 
-afficherlestrajects();
+//afficherlestrajects();
 
 
 // 4. Acheter un ticket
@@ -216,27 +216,14 @@ afficherlestrajects();
 let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
 
 function checktrajet(trips, Iddetrajet) {
-    let check;
-    let trajet;
-    for (let i in trips) {
-        if (trips[i].id == Iddetrajet) {
-            check = true
-            trajet = trips[i]
-        }
+    for (let trip in trips) {
+        if (trips[trip].id === Iddetrajet) {
+            return trips[trip];
+        };
     };
-    if (check) {
-        console.log(" trajet existe")
-        return trajet
-    }
-    else {
-        return " trajet not existe "
-    };
+    return null;
 };
-
-let output = checktrajet(trips, Iddetrajet)
-console.log(output)
-
-/// // vérifier qu'il reste au moins une place disponible ;
+// vérifier qu'il reste au moins une place disponible ;
 
 let trip = checktrajet(trips, Iddetrajet)
 
@@ -249,29 +236,35 @@ function checkforavailaiblePlaces(trip) {
     }
 };
 
-placedispo = checkforavailaiblePlaces(trip)
-console.log(placedispo);
+// placedispo = checkforavailaiblePlaces(trip)
+// console.log(placedispo);
 
 
 // créer une fonction to generate ticket ;
 let username = getUserinput(" entrer your name : ")
 function ticketgenerate(username, trip) {
-    let ticket = {
-        idTicket: tickets.length + 1,
-        userName: username,
-        depart: trip.departure,
-        arrivée: trip.destination,
-        tripId: trip.id,
-        seatNumber: 50 - trip.availableSeats + 1,
-        price: trip.price
+    if (trip === null)
+        return " trajet not found "
+    else if (trip.availableSeats < 1)
+        return "no places available "
+    else {
+        let ticket = {
+            idTicket: tickets.length + 1,
+            userName: username,
+            depart: trip.departure,
+            arrivée: trip.destination,
+            tripId: trip.id,
+            seatNumber: 50 - trip.availableSeats + 1,
+            price: trip.price
+        };
+        tickets.push(ticket);
+        trip.availableSeats = trip.availableSeats - 1;
+        console.log(' Ticket acheté avec succès !')
+        return ticket
     };
-    tickets.push(ticket);
-    trip.availableSeats = trip.availableSeats - 1;
-    console.log(tickets)
-    console.log(' Ticket acheté avec succès !')
 };
-let ticketsout = ticketgenerate(username, trip);
-console.log(ticketsout)
+let X =ticketgenerate(username, trip);
+console.log(X)
 
 
 // // 5. Afficher les tickets
@@ -366,3 +359,20 @@ function filtrertraject(trips, departville) {
 };
 
 filtrertraject(trips, departville);
+
+// 9. Trier les trajets
+
+function Triertrajet(trips) {
+    for (let i = 0; i < trips.length; i++) {
+        for (let j = 0; j < trips.length -1; j++) {
+            if (trips[j].price > trips[j + 1].price) {
+                let temp = trips[j];
+                trips[j] = trips[j + 1];
+                trips[j + 1] = temp;
+            };
+        };
+    };
+    return trips
+};
+let Z = Triertrajet(trips)
+console.log(Z)
