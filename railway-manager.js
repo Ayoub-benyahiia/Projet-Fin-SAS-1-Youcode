@@ -186,14 +186,14 @@ const trips = [
 
 const tickets = [];
 let counttickets = 1
-//
+
 function getUserinput(question) {
     let input = prompte(question);
     return input
 };
 
 
-//
+
 function afficherlestrajects() {
     for (let element in trips) {
         let traject =
@@ -297,30 +297,48 @@ function searchbyname(tickets, name) {
 };
 
 function filtrertraject(trips, departville) {
+    let check;
     let foundville = [];
     for (let element in trips) {
         if (trips[element].departure === departville) {
-            foundville.push(trips[element]);
-        };
+            check = true
+            foundville.push(trips[element])
+        }
     };
-    for (let ville in foundville) {
-        console.log(" depart : " + foundville[ville].departure + "---->" + foundville[ville].destination + " :" + foundville[ville].price + " DH")
+    if (check) {
+        for (let ville in foundville) {
+            console.log(" depart : " + foundville[ville].departure + "---->" + foundville[ville].destination + " :" + foundville[ville].price + " DH")
+        };
+    }
+    else {
+        console.log(" city not found enter another city ")
     };
 };
 
-function Triertrajet(trips) {
-    for (let i = 0; i < trips.length; i++) {
-        for (let j = 0; j < trips.length - 1; j++) {
-            if (trips[j].price > trips[j + 1].price) {
-                let temp = trips[j];
-                trips[j] = trips[j + 1];
-                trips[j + 1] = temp;
+function Triertrajet(sortedtrips) {
+    for (let i = 0; i < sortedtrips.length; i++) {
+        for (let j = 0; j < sortedtrips.length - 1; j++) {
+            if (sortedtrips[j].price > sortedtrips[j + 1].price) {
+                let temp = sortedtrips[j];
+                sortedtrips[j] = sortedtrips[j + 1];
+                sortedtrips[j + 1] = temp;
             };
         };
     };
-    return trips
+    return sortedtrips
 };
 
+function tikcettempate(sortedtrips){
+    for(let trip in sortedtrips)
+        console.log( 
+            'Ticket : ', sortedtrips[trip].id,
+            'Trajet : ', sortedtrips[trip].departure, "--->", sortedtrips[trip].destination,
+            'Time de depart : ', sortedtrips[trip].departureTime,
+            'Time de arrival : ', sortedtrips[trip].arrivalTime,
+            'Places:', sortedtrips[trip].availableSeats,
+            'Prix : ', sortedtrips[trip].price, 
+    );
+};
 // Menu pricipal
 
 let choix;
@@ -369,8 +387,6 @@ do {
             break;
         case 7:
             let tripsbyprice = Triertrajet(trips)
-            console.log(tripsbyprice)
-        case 0:
-            break;
-    }
+            tikcettempate(tripsbyprice)
+    };
 } while (choix != 0)
