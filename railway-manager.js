@@ -295,43 +295,31 @@ function searchbyname(tickets, name) {
         return " ticket not found "
     }
 };
-// // 8. Filtrer les trajets
 
-// let departville = getUserinput(" entre your ville de depart to filtre trajet : ")
-// function filtrertraject(trips, departville) {
-//     let foundville = [];
-//     for (let element in trips) {
-//         if (trips[element].departure === departville) {
-//             foundville.push(trips[element]);
-//         };
-//     };
-//     for (let i in foundville) {
-//         console.log(
-//             '\n', " Ville de départ  " + departville,
-//             '\n' + " depart : ", foundville[i].departure, "---->", foundville[i].destination, ":", foundville[i].price
-//         )
-//     };
-//     return foundville;
-// };
+function filtrertraject(trips, departville) {
+    let foundville = [];
+    for (let element in trips) {
+        if (trips[element].departure === departville) {
+            foundville.push(trips[element]);
+        };
+    };
+    for (let ville in foundville) {
+        console.log(" depart : " + foundville[ville].departure + "---->" + foundville[ville].destination + " :" + foundville[ville].price + " DH")
+    };
+};
 
-// filtrertraject(trips, departville);
-
-// // 9. Trier les trajets
-
-// function Triertrajet(trips) {
-//     for (let i = 0; i < trips.length; i++) {
-//         for (let j = 0; j < trips.length - 1; j++) {
-//             if (trips[j].price > trips[j + 1].price) {
-//                 let temp = trips[j];
-//                 trips[j] = trips[j + 1];
-//                 trips[j + 1] = temp;
-//             };
-//         };
-//     };
-//     return trips
-// };
-// let Z = Triertrajet(trips)
-// console.log(Z)
+function Triertrajet(trips) {
+    for (let i = 0; i < trips.length; i++) {
+        for (let j = 0; j < trips.length - 1; j++) {
+            if (trips[j].price > trips[j + 1].price) {
+                let temp = trips[j];
+                trips[j] = trips[j + 1];
+                trips[j + 1] = temp;
+            };
+        };
+    };
+    return trips
+};
 
 // Menu pricipal
 
@@ -369,10 +357,19 @@ do {
             let ticketID = +getUserinput(" entrer your Identifiant du ticket to remove your ticket : ")
             let removeedticket = Anulleticket(tickets, ticketID);
             console.log(removeedticket)
+            break;
         case 5:
             let name = getUserinput(" entrer your name to affiche ticket by name : ")
             let outputbyname = searchbyname(tickets, name);
             console.log(outputbyname)
+            break;
+        case 6:
+            let departville = getUserinput(" entre your ville de depart to filtre trajet : ")
+            filtrertraject(trips, departville)
+            break;
+        case 7:
+            let tripsbyprice = Triertrajet(trips)
+            console.log(tripsbyprice)
         case 0:
             break;
     }
