@@ -231,3 +231,20 @@ const tickets = [];
 // console.log(placedispo);
 
 
+
+
+//
+function afficherlestrajects() {
+    for (let element in trips) {
+        let traject = trips[element].id + " " +
+            trips[element].departure + " --->  " +
+            trips[element].destination +
+            '\n' + " Départ : " + trips[element].departureTime +
+            '\n' + " Arrivée : " + trips[element].arrivalTime +
+            '\n' + " Prix : " + trips[element].price + "DH" +
+            '\n' + " Places disponibles : " + trips[element].availableSeats
+        console.log(traject)
+        console.log("_____________________________________________")
+    };
+
+};

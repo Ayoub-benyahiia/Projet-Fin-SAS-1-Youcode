@@ -185,17 +185,19 @@ const trips = [
 ];
 
 const tickets = [];
-
-// fonction dynamic for input
+let counttickets = 1
+//
 function getUserinput(question) {
     let input = prompte(question);
     return input
-}
+};
 
-// afficher all traject 
+
+//
 function afficherlestrajects() {
     for (let element in trips) {
-        let traject = trips[element].id + " " +
+        let traject =
+            trips[element].id + " " +
             trips[element].departure + " --->  " +
             trips[element].destination +
             '\n' + " Départ : " + trips[element].departureTime +
@@ -208,13 +210,6 @@ function afficherlestrajects() {
 
 };
 
-//afficherlestrajects();
-
-
-// 4. Acheter un ticket
-
-let Iddetrajet = getUserinput("entrer uour Identifiant du trajet :")
-
 function checktrajet(trips, Iddetrajet) {
     for (let trip in trips) {
         if (trips[trip].id === Iddetrajet) {
@@ -223,25 +218,16 @@ function checktrajet(trips, Iddetrajet) {
     };
     return null;
 };
-// vérifier qu'il reste au moins une place disponible ;
 
-let trip = checktrajet(trips, Iddetrajet)
+// function checkforavailaiblePlaces(trip) {
+//     if (trip.availableSeats > 0) {
+//         return " seats available ";
+//     }
+//     else {
+//         return " train is full ";
+//     }
+// };
 
-function checkforavailaiblePlaces(trip) {
-    if (trip.availableSeats > 0) {
-        return " seats available ";
-    }
-    else {
-        return " train is full ";
-    }
-};
-
-// placedispo = checkforavailaiblePlaces(trip)
-// console.log(placedispo);
-
-
-// créer une fonction to generate ticket ;
-let username = getUserinput(" entrer your name : ")
 function ticketgenerate(username, trip) {
     if (trip === null)
         return " trajet not found "
@@ -249,130 +235,147 @@ function ticketgenerate(username, trip) {
         return "no places available "
     else {
         let ticket = {
-            idTicket: tickets.length + 1,
-            userName: username,
-            depart: trip.departure,
-            arrivée: trip.destination,
+            idTicket: counttickets,
+            userName: username.toLowerCase(),
+            start: trip.departure,
+            End: trip.destination,
             tripId: trip.id,
-            seatNumber: 50 - trip.availableSeats + 1,
+            seatNumber: 51 - trip.availableSeats,
             price: trip.price
         };
         tickets.push(ticket);
         trip.availableSeats = trip.availableSeats - 1;
+        counttickets++
         console.log(' Ticket acheté avec succès !')
         return ticket
     };
 };
-let X =ticketgenerate(username, trip);
-console.log(X)
 
-
-// // 5. Afficher les tickets
 function afficherlestickets(tickets) {
     for (let ticket in tickets) {
-        if (ticket in tickets) {
-            console.log(
-                'Ticket : ', tickets[ticket].idTicket,
-                'Passager :', tickets[ticket].userName,
-                'Trajet : ', tickets[ticket].depart, "--->", tickets[ticket].arrivée,
-                'Place : ', tickets[ticket].seatNumber,
-                'Prix : ', tickets[ticket].price, " DH"
-            )
-        }
-        else {
-            console.log(" Aucun ticket enregistré ")
-        }
-    };
-};
-let ticketEnregistree = afficherlestickets(tickets);
-console.log(ticketEnregistree)
-
-// 6. Annuler un ticket
-
-let ticketID = getUserinput(" entrer your Identifiant du ticket : ")
-function Removeticket(tickets, ticketID) {
-    let check;
-    for (let i in tickets) {
-        if (tickets[i].idTicket == ticketID)
-            check = true
-    };
-    if (check) {
-        tickets.splice(ticketID, 1);
-        console.log(" Ticket annulé avec succès.");
-        return tickets;
-    }
-    else {
-        return " Ticket introuvable. "
+        console.log(
+            'Ticket : ', tickets[ticket].idTicket,
+            'Passager :', tickets[ticket].userName,
+            'Trajet : ', tickets[ticket].start, "--->", tickets[ticket].End,
+            'Place : ', tickets[ticket].seatNumber,
+            'Prix : ', tickets[ticket].price, " DH"
+        )
     };
 };
 
-let removedticket = Removeticket(tickets, ticketID)
-console.log(removedticket)
 
-// 7. Rechercher un ticket
+function Anulleticket(tickets, ticketID) {
+    for (let i = 0; i < tickets.length; i++) {
+        if (tickets[i].idTicket === ticketID) {
+            tickets.splice(ticketID - 1, 1);
+            return " Ticket annulé avec succès.";
+        }
+    };
+    return "ticket introuvable"
+};
 
-let prenom = getUserinput(" entrer your name : ")
-function afficherbyname(tickets, prenom) {
+function searchbyname(tickets, name) {
     let check;
-    let foundticket;
+    let foundtickets = [];
     for (let ticket in tickets) {
-        if (tickets[ticket].userName == prenom)
+        if (tickets[ticket].userName === name) {
             check = true
-        foundticket = tickets[ticket]
-
+            foundtickets.push(tickets[ticket])
+        }
     };
     if (check) {
-        console.log(" Ticket : ")
         console.log(
-            'Ticket : ', foundticket.idTicket,
-            'Passager :', foundticket.userName,
-            'Trajet : ', foundticket.depart, "--->", foundticket.arrivée,
-            'Place : ', foundticket.seatNumber,
-            'Prix : ', foundticket.price, " DH"
+            'Ticket : ', foundtickets.idTicket,
+            'Passager :', foundtickets.userName,
+            'Trajet : ', foundtickets.start, "--->", foundtickets.End,
+            'Place : ', foundtickets.seatNumber,
+            'Prix : ', foundtickets.price, " DH"
         )
     }
     else {
-        return " ticket not found !"
-    };
+        return " ticket not found "
+    }
 };
 
-let outputbyname = afficherbyname(tickets, prenom)
-console.log(outputbyname)
+// // 8. Filtrer les trajets
 
-// 8. Filtrer les trajets
+// let departville = getUserinput(" entre your ville de depart to filtre trajet : ")
+// function filtrertraject(trips, departville) {
+//     let foundville = [];
+//     for (let element in trips) {
+//         if (trips[element].departure === departville) {
+//             foundville.push(trips[element]);
+//         };
+//     };
+//     for (let i in foundville) {
+//         console.log(
+//             '\n', " Ville de départ  " + departville,
+//             '\n' + " depart : ", foundville[i].departure, "---->", foundville[i].destination, ":", foundville[i].price
+//         )
+//     };
+//     return foundville;
+// };
 
-let departville = getUserinput(" entre your ville de depart ")
-function filtrertraject(trips, departville) {
-    let foundville = [];
-    for (let element in trips) {
-        if (trips[element].departure === departville) {
-            foundville.push(trips[element]);
-        };
-    };
-    for (let i in foundville) {
-        console.log(
-            '\n', " Ville de départ  " + departville,
-            '\n' + " depart : ", foundville[i].departure, "---->", foundville[i].destination, ":", foundville[i].price
-        )
-    };
-    return foundville;
-};
+// filtrertraject(trips, departville);
 
-filtrertraject(trips, departville);
+// // 9. Trier les trajets
 
-// 9. Trier les trajets
+// function Triertrajet(trips) {
+//     for (let i = 0; i < trips.length; i++) {
+//         for (let j = 0; j < trips.length - 1; j++) {
+//             if (trips[j].price > trips[j + 1].price) {
+//                 let temp = trips[j];
+//                 trips[j] = trips[j + 1];
+//                 trips[j + 1] = temp;
+//             };
+//         };
+//     };
+//     return trips
+// };
+// let Z = Triertrajet(trips)
+// console.log(Z)
 
-function Triertrajet(trips) {
-    for (let i = 0; i < trips.length; i++) {
-        for (let j = 0; j < trips.length -1; j++) {
-            if (trips[j].price > trips[j + 1].price) {
-                let temp = trips[j];
-                trips[j] = trips[j + 1];
-                trips[j + 1] = temp;
-            };
-        };
-    };
-    return trips
-};
-let Z = Triertrajet(trips)
-console.log(Z)
+// Menu pricipal
+
+let choix;
+do {
+    console.log("=================================")
+    console.log("RAILWAY MANAGER")
+    console.log("=================================")
+    console.log("1. Afficher les trajets")
+    console.log("2. Acheter un ticket")
+    console.log("3. Afficher les tickets")
+    console.log("4. Annuler un ticket")
+    console.log("5. Rechercher un ticket")
+    console.log("6. Filtrer les trajets")
+    console.log("7. Trier les trajets")
+    console.log("0. Quitter")
+
+    choix = +getUserinput('\nvotre choix: ')
+
+    switch (choix) {
+        case 1:
+            afficherlestrajects();
+            break;
+        case 2:
+            let Iddetrajet = +getUserinput("entrer uour Identifiant du trajet :")
+            let username = getUserinput(" entrer your name")
+            let trip = checktrajet(trips, Iddetrajet);
+            let yourticket = ticketgenerate(username, trip);
+            console.log(yourticket)
+            break;
+        case 3:
+            afficherlestickets(tickets);
+            break;
+        case 4:
+            let ticketID = +getUserinput(" entrer your Identifiant du ticket to remove your ticket : ")
+            let removeedticket = Anulleticket(tickets, ticketID);
+            console.log(removeedticket)
+        case 5:
+            let name = getUserinput(" entrer your name to affiche ticket by name : ")
+            let outputbyname = searchbyname(tickets, name);
+            console.log(outputbyname)
+        case 0:
+            break;
+    }
+} while (choix != 0)
