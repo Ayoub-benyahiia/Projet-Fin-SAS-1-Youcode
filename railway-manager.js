@@ -339,12 +339,12 @@ function tikcettempate(sortedtrips){
             'Prix : ', sortedtrips[trip].price, 
     );
 };
-// Menu pricipal
+
 
 let choix;
 do {
     console.log("=================================")
-    console.log("RAILWAY MANAGER")
+    console.log("======= RAILWAY MANAGER ========")
     console.log("=================================")
     console.log("1. Afficher les trajets")
     console.log("2. Acheter un ticket")
