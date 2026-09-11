@@ -284,19 +284,17 @@ function searchbyname(tickets, name) {
         }
     };
     if (check) {
-        console.log(
-            'Ticket : ', foundtickets.idTicket,
-            'Passager :', foundtickets.userName,
-            'Trajet : ', foundtickets.start, "--->", foundtickets.End,
-            'Place : ', foundtickets.seatNumber,
-            'Prix : ', foundtickets.price, " DH"
-        )
+        for (let elem in foundtickets)
+            return ('Ticket : ' + foundtickets[elem].idTicket +
+                '  Passager :' + foundtickets[elem].userName +
+                '  Trajet : ' + foundtickets[elem].start + " ---> " + foundtickets[elem].End +
+                '  Place : ' + foundtickets[elem].seatNumber +
+                '  Prix : ' + foundtickets[elem].price + "DH ")
     }
     else {
         return " ticket not found "
     }
 };
-
 // // 8. Filtrer les trajets
 
 // let departville = getUserinput(" entre your ville de depart to filtre trajet : ")
