@@ -219,20 +219,19 @@ function checktrajet(trips, Iddetrajet) {
     return null;
 };
 
-// function checkforavailaiblePlaces(trip) {
-//     if (trip.availableSeats > 0) {
-//         return " seats available ";
-//     }
-//     else {
-//         return " train is full ";
-//     }
-// };
+function checkforavailaiblePlaces(trip) {
+    if (trip.availableSeats > 0) {
+        return " seats available ";
+    }
+    else {
+        return " train is full ";
+    }
+};
 
 function ticketgenerate(username, trip) {
-    if (trip === null)
-        return " trajet not found "
-    else if (trip.availableSeats < 1)
-        return "no places available "
+    let check = checkforavailaiblePlaces(trip)
+    if (check){
+    }
     else {
         let ticket = {
             idTicket: counttickets,
@@ -240,14 +239,17 @@ function ticketgenerate(username, trip) {
             start: trip.departure,
             End: trip.destination,
             tripId: trip.id,
-            seatNumber: 51 - trip.availableSeats,
+            seatNumber: 50 - trip.availableSeats +1,
             price: trip.price
         };
         tickets.push(ticket);
         trip.availableSeats = trip.availableSeats - 1;
         counttickets++
         console.log(' Ticket acheté avec succès !')
-        return ticket
+        return " idTicket: " + ticket.idTicket +
+               " username " + ticket.userName +
+               " start" + ticket.start+
+               " End " + 
     };
 };
 
